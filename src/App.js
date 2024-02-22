@@ -1,25 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
 
+import ProjectList from './components/ProjectList';
+
 function App() {
+
+  const plist = [
+    {'id': 1,
+     'name': 'project one',
+    'description': 'this is description of project one'
+    },
+    {'id': 2,
+     'name': 'project two',
+    'description': 'this is description of project two'
+    }
+  ];
+
+  console.log(plist);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <h1 className="text-3xl font-bold underline">
+        this is App.js
+      </h1>
+      <ProjectList items={plist}/>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;
