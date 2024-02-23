@@ -1,17 +1,14 @@
-import { useParams } from 'react-router-dom';
-import ProjectDetail from '../components/ProjectList';
+import { useParams } from "react-router-dom";
+import ProjectDetail from "../components/ProjectDetail";
 
-function ProjectPage({item}) {
+function ProjectPage({ item }) {
+  console.log("in ProjectPage.js ... ");
 
-    console.log("in ProjectPage.js ... ");
+  const { id } = useParams();
 
-    const { id } = useParams();
+  //use the id to find the data
+  //call some API
 
-    //use the id to find the data
-    //call some API
-    
-    return (
-        <ProjectDetail item={item}/>
-    )
-};
+  return <ProjectDetail item={item} />;
+}
 export default ProjectPage;

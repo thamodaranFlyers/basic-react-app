@@ -1,35 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ProjectPage from './pages/ProjectPage';
-import SupportPage from './pages/SupportPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProjectPage from "./pages/ProjectPage";
+import SupportPage from "./pages/SupportPage";
 
-const router = createBrowserRouter([
+const router = [
   {
-    path:'/',
-    element:<App/>
+    path: "/",
+    element: <App />,
   },
   {
-    path:'/project/:id',
-    element: <ProjectPage />
+    path: "/project/:id",
+    element: <ProjectPage />,
   },
   {
-    path:'/support',
-    element: <SupportPage/>
-  }
+    path: "/support",
+    element: <SupportPage />,
+  },
+];
 
-]);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  //<React.StrictMode>
-    //<App />
-    <RouterProvider router={router}/>
-  //</React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      {router.map((route) => (
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
