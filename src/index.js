@@ -7,19 +7,34 @@ import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProjectPage from "./pages/ProjectPage";
 import SupportPage from "./pages/SupportPage";
+import ProjectListPage from "./pages/ProjectListPage";
+import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
 
 const router = [
   {
     path: "/",
-    element: <App />,
+    element: <App />
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
+  },
+  {
+    path: "/logout",
+    element: <LogoutPage/>
+  },
+  {
+    path: "/projects",
+    element: <ProjectListPage/>
   },
   {
     path: "/project/:id",
-    element: <ProjectPage />,
+    element: <ProjectPage />
   },
   {
     path: "/support",
-    element: <SupportPage />,
+    element: <SupportPage />
   },
 ];
 
