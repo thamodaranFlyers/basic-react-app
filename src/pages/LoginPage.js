@@ -10,11 +10,30 @@ function LoginPage(){
 
         if (e.target.id == 'user1'){
             sessionStorage.setItem('user-id',"1");
+            const perms = {
+                "org_perms":[
+                  'view-projects', 'support-plan'
+                ],
+                "project_perms":{
+                  "1":['view-tasks']
+                }
+              };
+            sessionStorage.setItem('perms', JSON.stringify(perms));
             //how to redirect to App.js ?
             navigate('/');
         }
         else if (e.target.id == 'user2'){
             sessionStorage.setItem('user-id', "2");
+            const perms = {
+                "org_perms":[
+                  'view-projects', 'manage-users', 'support-plan'
+                ],
+                "project_perms":{
+                  "1":['view-tasks'],
+                  "2":['view-tasks', 'create-tasks']
+                }
+              };
+            sessionStorage.setItem('perms', JSON.stringify(perms));
             //how to redirect to App.js ?
             navigate('/');
         }

@@ -8,7 +8,7 @@ function ProjectListPage({ items }) {
   //for now build a list of project objects 
 
   const currentUserID = sessionStorage.getItem('user-id');
-
+  const currentUserPerms = JSON.parse(sessionStorage.getItem('perms'));
   let plist = []
   //eventually fetch data using API + currentUserID
   //for now populate here 
@@ -37,10 +37,11 @@ function ProjectListPage({ items }) {
 
   return (
     <div>
+      <Navbar perms={currentUserPerms}/>
       <div className="App">
         <header className="App-header">
           <h1 className="text-3xl font-bold underline">
-          this is App.js
+          this is ProjectListPage
           </h1>
           <ProjectList items={plist}/>
         </header>

@@ -1,9 +1,12 @@
 import React from "react";
 
 function hasOrgPerm(perms, rolename) {
+    console.log("checking for role: '" + rolename + "' in " + perms);
     if (perms.hasOwnProperty('org_perms')) {
-        if (perms['org_perms'].includes(rolename))
+        if (perms['org_perms'].includes(rolename)) {
+            console.log("found role: '" + rolename + "' in org_perms array");
             return true;
+        }
         else
             return false;
     }
@@ -13,7 +16,7 @@ function hasOrgPerm(perms, rolename) {
 }
 
 function isLoggedIn(){
-    if (localStorage.hasOwnProperty('user-id')){
+    if (sessionStorage.hasOwnProperty('user-id')){
         return true;
     }
     else {
