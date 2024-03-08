@@ -1,64 +1,84 @@
 import "./App.css";
 
-import ProjectList from "./components/ProjectList";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
+import ProjectListPage from "./pages/ProjectListPage";
+import ProjectPage from "./pages/ProjectPage";
+import SupportPage from "./pages/SupportPage";
+import { PrivateRoute } from "./PrivateRoute";
+import { Layout } from "./Layout";
 
 function App() {
   //think of this as a dashboard page
+  const router = [
+    {
+      path: "/",
+      element: <LoginPage />,
+    },
+    {
+      path: "logout",
+      element: <LogoutPage />,
+    },
+  ];
 
-  const currentUserID = sessionStorage.getItem("user-id");
-
-  let plist = [];
-  let perms = {};
-  //eventually fetch data using API + currentUserID
-  //for now populate here
-  if (currentUserID === "1") {
-    perms = {
-      org_perms: ["view-projects", "support-plan"],
-      project_perms: {
-        1: ["view-tasks"],
-      },
-    };
-    plist = [
-      {
-        id: 1,
-        name: "project one",
-        description: "this is description of project one",
-      },
-    ];
-  } else if (currentUserID === "2") {
-    perms = {
-      org_perms: ["view-projects", "manage-users", "support-plan"],
-      project_perms: {
-        1: ["view-tasks"],
-        2: ["view-tasks", "create-tasks"],
-      },
-    };
-    plist = [
-      {
-        id: 1,
-        name: "project one",
-        description: "this is description of project one",
-      },
-      {
-        id: 2,
-        name: "project two",
-        description: "this is description of project two",
-      },
-    ];
-  }
-
-  console.log(plist);
+  const authRoute = [
+    {
+      path: "/dashboard",
+      element: <ProjectListPage />,
+    },
+    {
+      path: "/projects",
+      element: <ProjectListPage />,
+    },
+    {
+      path: "/project/:id",
+      element: <ProjectPage />,
+    },
+    {
+      path: "/support",
+      element: <SupportPage />,
+    },
+  ];
 
   return (
     <div>
-      <Navbar perms={perms} />
-      <div className="App">
+      {/* <Navbar perms={perms} /> */}
+      <BrowserRouter>
+        <Routes>
+          <>
+            {/* <PrivateRoute>
+              <LoginPage />
+            </PrivateRoute> */}
+            {authRoute.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                // element={<PrivateRoute>{route.element}</PrivateRoute>}
+                element={
+                  <PrivateRoute>
+                    <Layout>{route.element}</Layout>
+                  </PrivateRoute>
+                }
+              />
+            ))}
+            {router.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </>
+        </Routes>
+      </BrowserRouter>
+      {/* <div className="App">
         <header className="App-header">
           <h1 className="text-3xl font-bold underline">this is App.js</h1>
           <ProjectList items={plist} />
         </header>
-      </div>
+      </div> */}
+      <Outlet />
     </div>
   );
 }

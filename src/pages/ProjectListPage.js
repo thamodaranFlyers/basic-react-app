@@ -39,7 +39,7 @@ function ProjectListPage({ items }) {
 
   return (
     <div>
-      <Navbar perms={currentUserPerms} />
+      {/* <Navbar perms={currentUserPerms} /> */}
       <div className="App">
         <header className="App-header">
           <h1 className="text-3xl font-bold underline">
