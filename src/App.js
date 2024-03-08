@@ -43,18 +43,13 @@ function App() {
 
   return (
     <div>
-      {/* <Navbar perms={perms} /> */}
       <BrowserRouter>
         <Routes>
           <>
-            {/* <PrivateRoute>
-              <LoginPage />
-            </PrivateRoute> */}
             {authRoute.map((route) => (
               <Route
                 key={route.path}
                 path={route.path}
-                // element={<PrivateRoute>{route.element}</PrivateRoute>}
                 element={
                   <PrivateRoute>
                     <Layout>{route.element}</Layout>
@@ -72,12 +67,6 @@ function App() {
           </>
         </Routes>
       </BrowserRouter>
-      {/* <div className="App">
-        <header className="App-header">
-          <h1 className="text-3xl font-bold underline">this is App.js</h1>
-          <ProjectList items={plist} />
-        </header>
-      </div> */}
       <Outlet />
     </div>
   );
