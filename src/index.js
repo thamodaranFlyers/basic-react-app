@@ -14,27 +14,27 @@ import LogoutPage from "./pages/LogoutPage";
 const router = [
   {
     path: "/",
-    element: <App />
+    element: <LoginPage />,
   },
   {
-    path: "/login",
-    element: <LoginPage/>
+    path: "/dashboard",
+    element: <App />,
   },
   {
     path: "/logout",
-    element: <LogoutPage/>
+    element: <LogoutPage />,
   },
   {
     path: "/projects",
-    element: <ProjectListPage/>
+    element: <ProjectListPage />,
   },
   {
     path: "/project/:id",
-    element: <ProjectPage />
+    element: <ProjectPage />,
   },
   {
     path: "/support",
-    element: <SupportPage />
+    element: <SupportPage />,
   },
 ];
 
