@@ -1,33 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-import ProjectList from './components/ProjectList';
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
+import ProjectListPage from "./pages/ProjectListPage";
+import ProjectPage from "./pages/ProjectPage";
+import SupportPage from "./pages/SupportPage";
+import { PrivateRoute } from "./PrivateRoute";
+import { Layout } from "./Layout";
 
 function App() {
-
-  const plist = [
-    {'id': 1,
-     'name': 'project one',
-    'description': 'this is description of project one'
+  //think of this as a dashboard page
+  const router = [
+    {
+      path: "/",
+      element: <LoginPage />,
     },
-    {'id': 2,
-     'name': 'project two',
-    'description': 'this is description of project two'
-    }
+    {
+      path: "logout",
+      element: <LogoutPage />,
+    },
   ];
 
-  console.log(plist);
+  const authRoute = [
+    {
+      path: "/dashboard",
+      element: <ProjectListPage />,
+    },
+    {
+      path: "/projects",
+      element: <ProjectListPage />,
+    },
+    {
+      path: "/project/:id",
+      element: <ProjectPage />,
+    },
+    {
+      path: "/support",
+      element: <SupportPage />,
+    },
+  ];
 
   return (
-    <div className="App">
-      <header className="App-header">
-      <h1 className="text-3xl font-bold underline">
-        this is App.js
-      </h1>
-      <ProjectList items={plist}/>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <>
+            {authRoute.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  <PrivateRoute>
+                    <Layout>{route.element}</Layout>
+                  </PrivateRoute>
+                }
+              />
+            ))}
+            {router.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </>
+        </Routes>
+      </BrowserRouter>
+      <Outlet />
     </div>
-  )
+  );
 }
 
 export default App;
